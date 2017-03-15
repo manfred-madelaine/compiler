@@ -1,0 +1,8 @@
+*.o
+tp
+tp_y.c
+tp_l.c
+tp_y.h
+tp_y.output
+Makefile
+*.tar

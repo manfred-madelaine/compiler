@@ -1,0 +1,418 @@
+		-- Debut de la GCI
+
+
+		-- Génération des Tables virtuelles pour chacune des classes
+
+Integer_0:ALLOC 1		-- allocation de la TV d'une classe (Integer)
+	DUPN 1
+	PUSHA Integer_toString		-- ajout meth
+	STORE 0			-- stockage du champ dans la TV
+String_1:ALLOC 2		-- allocation de la TV d'une classe (String)
+	DUPN 1
+	PUSHA String_print		-- ajout meth
+	STORE 0			-- stockage du champ dans la TV
+	DUPN 1
+
+	PUSHA String_println		-- ajout meth
+	STORE 1			-- stockage du champ dans la TV
+Point_2:ALLOC 4		-- allocation de la TV d'une classe
+	DUPN 1
+			-- Définition du Constructeur
+	PUSHA Point_Point			-- champ: nomObjet_nomMethode
+	STORE 0				-- stockage du champ dans la TV
+
+	DUPN 1
+	PUSHA Point_id			-- champ: nomObjet_nomMethode
+	STORE 1				-- stockage du champ dans la TV
+
+	DUPN 1
+	PUSHA Point_setName			-- champ: nomObjet_nomMethode
+	STORE 2				-- stockage du champ dans la TV
+
+	DUPN 1
+	PUSHA Point_print			-- champ: nomObjet_nomMethode
+	STORE 3				-- stockage du champ dans la TV
+* JUMP main
+
+
+		-- Blocs de methode :
+
+Integer_toString:NOP
+	STR
+RETURN
+
+String_print:NOP
+	STR
+	DUPN 1
+	WRITES
+RETURN
+
+String_println:NOP
+	STR
+	DUPN 1
+	WRITES
+	PUSHS "\n"
+	WRITES
+RETURN
+
+	-- bloc d'une methode
+Point_Point: NOP
+		-- Emplacement du résultat
+result_3:ALLOC 4	-- allocation d'un objet : result
+DUPN 1
+PUSHG 2		-- charge la TV de la bonne classe
+STORE 0
+
+		-- Allocation des parametres: verifier que l'alocation se fait au bon endroit
+	-- parametre xc : Integer
+ALLOC 1	-- parametre xc : Integer
+	-- parametre yc : Integer
+ALLOC 1	-- parametre yc : Integer
+
+	-- LINSTR
+	-- EAFF
+-- IDVAR : x
+PUSHL 0	-- Charger une variable locale: x
+
+-- IDVAR : xc
+PUSHL 0	-- Charger une variable locale: xc
+
+STORE 0
+
+	-- LINSTR
+	-- EAFF
+-- IDVAR : y
+PUSHL 0	-- Charger une variable locale: y
+
+-- IDVAR : yc
+PUSHL 0	-- Charger une variable locale: yc
+
+STORE 0
+
+	-- SKIP
+POPN 1
+
+POPN 1
+
+
+		-- affecter le résultat NTM MTN ??
+RETURN
+
+	-- bloc d'une methode
+Point_id: NOP
+		-- Emplacement du résultat
+result_4:ALLOC 4	-- allocation d'un objet : result
+DUPN 1
+PUSHG 2		-- charge la TV de la bonne classe
+STORE 0
+
+		-- Allocation des parametres: verifier que l'alocation se fait au bon endroit
+
+PUSHL -1	-- LTHIS
+
+
+		-- affecter le résultat NTM MTN ??
+RETURN
+
+	-- bloc d'une methode
+Point_setName: NOP
+		-- Emplacement du résultat
+		-- VOID TYPE
+
+		-- Allocation des parametres: verifier que l'alocation se fait au bon endroit
+	-- parametre s : String
+ALLOC 1	-- parametre s : String
+
+	-- LINSTR
+	-- EAFF
+	-- SELECT
+PUSHL -1	-- LTHIS
+
+DUPN 1
+LOAD 3	-- attribut : name.rang 
+
+-- IDVAR : s
+PUSHL 0	-- Charger une variable locale: s
+
+STORE 0
+
+	-- SKIP
+POPN 1
+
+
+		-- affecter le résultat NTM MTN ??
+RETURN
+
+	-- bloc d'une methode
+Point_print: NOP
+		-- Emplacement du résultat
+		-- VOID TYPE
+
+		-- Allocation des parametres: verifier que l'alocation se fait au bon endroit
+
+	-- LINSTR
+	-- APPEL
+-- ESTR : "Inside Point::print"
+PUSHS "Inside Point::print"
+
+	-- APPEL
+--nom methode: println, 1
+-- IDAPPEL : println
+			-- Appel de methode
+
+			-- Appel: on charge le code de la methode
+	PUSHA call1		-- adresse de la fonction
+	CALL		-- appel
+	POPN 1		-- nettoyage la pile: supprimer les parametres
+
+
+
+	-- LINSTR
+	-- APPEL
+-- IDVAR : name
+PUSHL 0	-- Charger une variable locale: name
+
+	-- APPEL
+--nom methode: print, 2
+-- IDAPPEL : print
+			-- Appel de methode
+
+			-- Appel: on charge le code de la methode
+	PUSHA call2		-- adresse de la fonction
+	CALL		-- appel
+	POPN 1		-- nettoyage la pile: supprimer les parametres
+
+
+
+	-- LINSTR
+	-- APPEL
+	-- ECONCAT
+	-- ECONCAT
+	-- ECONCAT
+	-- ECONCAT
+-- ESTR : "= ("
+PUSHS "= ("
+
+	-- APPEL
+-- IDVAR : x
+PUSHL 0	-- Charger une variable locale: x
+
+	-- APPEL
+--nom methode: toString, 1
+-- IDAPPEL : toString
+			-- Appel de methode
+
+			-- Appel: on charge le code de la methode
+	PUSHA call1		-- adresse de la fonction
+	CALL		-- appel
+	POPN 1		-- nettoyage la pile: supprimer les parametres
+
+
+
+CONCAT
+
+-- ESTR : ", "
+PUSHS ", "
+
+CONCAT
+
+	-- APPEL
+-- IDVAR : y
+PUSHL 0	-- Charger une variable locale: y
+
+	-- APPEL
+--nom methode: toString, 1
+-- IDAPPEL : toString
+			-- Appel de methode
+
+			-- Appel: on charge le code de la methode
+	PUSHA call1		-- adresse de la fonction
+	CALL		-- appel
+	POPN 1		-- nettoyage la pile: supprimer les parametres
+
+
+
+CONCAT
+
+-- ESTR : ")"
+PUSHS ")"
+
+CONCAT
+
+	-- APPEL
+--nom methode: println, 1
+-- IDAPPEL : println
+			-- Appel de methode
+
+			-- Appel: on charge le code de la methode
+	PUSHA call1		-- adresse de la fonction
+	CALL		-- appel
+	POPN 1		-- nettoyage la pile: supprimer les parametres
+
+
+
+	-- SKIP
+POPN 1
+
+POPN 1
+
+POPN 1
+
+
+		-- affecter le résultat NTM MTN ??
+RETURN
+
+
+
+		-- Appel de fonctions:
+
+call0:PUSHL -1		-- Récupère le recepteur
+DUPN 1
+LOAD 0		-- charger Table Virtuelle
+LOAD 0		-- charger @methode
+CALL
+RETURN
+call1:PUSHL -1		-- Récupère le recepteur
+DUPN 1
+LOAD 0		-- charger Table Virtuelle
+LOAD 1		-- charger @methode
+CALL
+RETURN
+call2:PUSHL -1		-- Récupère le recepteur
+DUPN 1
+LOAD 0		-- charger Table Virtuelle
+LOAD 2		-- charger @methode
+CALL
+RETURN
+call3:PUSHL -1		-- Récupère le recepteur
+DUPN 1
+LOAD 0		-- charger Table Virtuelle
+LOAD 3		-- charger @methode
+CALL
+RETURN
+
+
+
+main:START
+-- BLOCK
+-- DECL
+		-- Déclaration de variable: Allocation puis Affectation des valeurs
+
+p1_5:ALLOC 4	-- allocation d'un objet : p1
+DUPN 1
+PUSHG 2		-- charge la TV de la bonne classe
+STORE 0
+
+		-- acceder au constructeur pour faire l'affectation
+		-- charge l'objet par rapport à FP
+PUSHL 0	 -- instance: p1
+
+
+		-- Boucle de construction !
+DUPN 1
+-- CONST : 1
+PUSHI 1
+
+STORE 1 	-- nom du paramètre: xc
+
+
+		-- Boucle de construction !
+DUPN 1
+-- CONST : 5
+PUSHI 5
+
+STORE 2 	-- nom du paramètre: yc
+POPN 1
+
+p2_6:ALLOC 4	-- allocation d'un objet : p2
+DUPN 1
+PUSHG 2		-- charge la TV de la bonne classe
+STORE 0
+
+		-- acceder au constructeur pour faire l'affectation
+		-- charge l'objet par rapport à FP
+PUSHL 1	 -- instance: p2
+
+
+		-- Boucle de construction !
+DUPN 1
+-- CONST : 2
+PUSHI 2
+
+STORE 1 	-- nom du paramètre: xc
+
+
+		-- Boucle de construction !
+DUPN 1
+-- CONST : 3
+PUSHI 3
+
+STORE 2 	-- nom du paramètre: yc
+POPN 1
+
+
+
+-- IS
+
+-- LINSTR
+-- APPEL
+-- IDVAR : p2
+PUSHL 1	-- Charger une variable locale: p2
+
+-- APPEL
+--nom methode: setName, 2
+-- IDAPPEL : setName
+		-- Appel de methode
+
+		-- Appel: on charge le code de la methode
+PUSHA call2		-- adresse de la fonction
+CALL		-- appel
+POPN 2		-- nettoyage la pile: supprimer les parametres
+
+
+
+-- LINSTR
+-- APPEL
+-- IDVAR : p1
+PUSHL 0	-- Charger une variable locale: p1
+
+-- APPEL
+--nom methode: print, 3
+-- IDAPPEL : print
+		-- Appel de methode
+
+		-- Appel: on charge le code de la methode
+PUSHA call3		-- adresse de la fonction
+CALL		-- appel
+POPN 1		-- nettoyage la pile: supprimer les parametres
+
+
+
+-- LINSTR
+-- APPEL
+-- IDVAR : p2
+PUSHL 1	-- Charger une variable locale: p2
+
+-- APPEL
+--nom methode: print, 3
+-- IDAPPEL : print
+		-- Appel de methode
+
+		-- Appel: on charge le code de la methode
+PUSHA call3		-- adresse de la fonction
+CALL		-- appel
+POPN 1		-- nettoyage la pile: supprimer les parametres
+
+
+
+-- SKIP
+POPN 1
+
+POPN 1
+
+POPN 1
+
+
+POPN 1
+finMain_7:STOP
+

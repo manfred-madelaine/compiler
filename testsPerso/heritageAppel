@@ -1,0 +1,17 @@
+class A() is {
+}
+
+class B() extends A() is {
+
+}
+
+class Test() is {
+  def f(a: A) is { "test".print(); }
+}
+
+{
+	var test: Test := new Test();
+	var b: B := new B();
+	is
+	test.f(b); /* Fonctionne car B sous-classe de A */
+}

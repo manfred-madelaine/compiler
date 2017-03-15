@@ -1,0 +1,9 @@
+{ 
+  var i: Integer := 2;
+  var s: String := "a";
+
+  is
+
+  i := s; /* Erreur de typage sur l'affectation */
+
+}

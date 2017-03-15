@@ -1,0 +1,16 @@
+class A() is {
+  var v : Integer := 1;
+  def f(i: Integer, s: String) is {  }
+}
+
+class B() extends A() is {
+
+  def g(s: String) is { super.f(1, s); /* Fonctionne */ } 
+  
+}
+
+{
+	var b: B := new B();
+	is
+	b.g(2); /* Ne fonctionne pas car Integer n'est pas une sous-classe de string */
+}

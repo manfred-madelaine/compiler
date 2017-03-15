@@ -1,0 +1,9 @@
+class A() is {
+	var x: Integer := 0;
+}
+
+{
+	var y: Integer := 0;
+	is
+	y := x+2;
+}
